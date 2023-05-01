@@ -1,6 +1,8 @@
 from homework import *
+from pytest import approx
 import sqlite3
 import pandas as pd
+import sklearn
 
 
 def test_python():
@@ -39,4 +41,10 @@ def test_sql():
     employee_df = pd.read_sql_query("SELECT * from employee_records", con)
     assert employee_df.query('ID == 3')['DIVISION'].iloc[0] == 'Hardware'
     assert employee_df.query('STARS == 3').shape[0] == 0
+
+
+def test_model():
+    model = train_model()
+    assert isinstance(model, sklearn.linear_model._ridge.Ridge)
+    assert model.alpha == approx(2.63, 0.1)
 

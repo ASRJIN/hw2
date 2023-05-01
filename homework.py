@@ -1,5 +1,6 @@
 import sqlite3
-
+import pandas as pd
+import numpy as np
 
 def max_val(input_list):
     """
@@ -14,4 +15,9 @@ sql_query_1 = " "
 
 # Delete the entry for all employee whose STARS = 3
 sql_query_2 = " "
+
+def train_model():
+    np.random.seed(42)
+    utility = pd.read_csv('https://raw.githubusercontent.com/AC4RM/AC4RM-dataset/main/homework/utilities.csv',
+                          index_col=0)
 

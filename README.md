@@ -11,3 +11,11 @@
 2. Write the sql query to do the following. You assume that we have created the `employee_records` table from the lecture
    - Update the value of the `DIVISION` column to Hardware for the employee whose ID=3 
    - Delete the entry for all employee whose STARS = 3
+3. In this homework, we will study penalized regression with the utilities data set
+   - Remove `gasbill`, `elecbill` and `notes` columns from the dataframe
+   - `kwh` means kilowatt-hours and `ccf` means cooling capacity factor
+   - The goal is to use `month`, `day`, `year`, `temp`, `kwh`, `ccf`, `thermsPerDay`, `billingDays` to predict `totalbill`
+   - Split the data into training and testing set (80/20) and use a random seed of 42
+   - Using `sklearn.preprocessing.StandardScaler` to standardize the dataset. Remember to `fit_transform` on the training set and just `transform` on the test set.  
+   - Set the range of alpha to `np.linspace(0.001, 50, 20)` and run a manual grid-search (for-loop) to find the optimal value of alpha (in terms of R-squared value on the test set).
+   - Retrain the ridge model with the best alpha and return it.
