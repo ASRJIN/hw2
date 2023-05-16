@@ -1,8 +1,11 @@
 from homework import *
 from pytest import approx
-import sqlite3
+from pathlib import Path
 import pandas as pd
+import numpy as np
+import sqlite3
 import sklearn
+import re
 
 
 def test_python():
@@ -42,9 +45,27 @@ def test_sql():
     assert employee_df.query('ID == 3')['DIVISION'].iloc[0] == 'Hardware'
     assert employee_df.query('STARS == 3').shape[0] == 0
 
+    Path('homework.db').unlink(missing_ok=True)
+
 
 def test_model():
     model = train_model()
     assert isinstance(model, sklearn.linear_model._ridge.Ridge)
     assert model.alpha == approx(2.63, 0.1)
+
+
+def test_regex():
+    assert re.search(regex_pattern, 'abc de')
+    assert re.search(regex_pattern, 'abcde')
+    assert not re.search(regex_pattern, 'ab cd')
+
+
+def test_monte_carlo():
+    results = []
+    np.random.seed(42)
+    for i in range(5000):
+        result = simple_bettor_v2(10000, 3000, 20)
+        results.append(result)
+
+    assert max(results) == 20
 
